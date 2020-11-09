@@ -1,0 +1,16 @@
+{
+  "name": "fdp-demo",
+  "version": "0.0.1",
+  "description": "A fdp-demo project",
+  "scripts": {
+    "build": "echo 'Do nothing...'"
+  },
+  "repository": "https://github.com/beshkenadze/fdp-demo",
+  "keywords": [
+    "fdp",
+    "demo"
+  ],
+  "author": "Aleksandr Beshkenadze <beshkenadze@gmail.com>",
+  "license": "MIT",
+  "dependencies": {}
+}

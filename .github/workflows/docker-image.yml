@@ -1,0 +1,32 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+      - name: Build the Docker image
+        run: "docker build \
+          --build-arg SERVER_VERSION_ARG=${{SERVER_VERSION}} \
+          --build-arg PACKAGE_MANAGER_ARG=${{ACKAGE_MANAGER}} \
+          --build-arg LOCK_FILE_ARG=${{LOCK_FILE}} \
+          --build-arg BUILD_CMD_ARG=${{UILD_CMD}} \
+          --build-arg INSTALL_CMD_ARG=${{INSTALL_CMD}} \
+          . --file Dockerfile --tag ghcr.io/${{ github.repository }}:latest"
+
+      - name: Push the Docker image
+        run: docker push ghcr.io/${{ github.repository }}:latest

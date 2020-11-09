@@ -1,0 +1,30 @@
+version: "3.2"
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy:alpine
+    ports:
+      - "80:80"
+    environment:
+      DEFAULT_HOST: demo.loc
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+  webapp:
+    image: beshkenadze/fdp-demo:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVER_VERSION_ARG: ${SERVER_VERSION}
+        PACKAGE_MANAGER_ARG: ${PACKAGE_MANAGER}
+        LOCK_FILE_ARG: ${LOCK_FILE}
+        BUILD_CMD_ARG: ${BUILD_CMD}
+        INSTALL_CMD_ARG: ${INSTALL_CMD}
+    environment:
+      VIRTUAL_HOST: "${APP_HOST}"
+      VIRTUAL_PORT: "${APP_PORT}"
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval $${APP_UPDATE_INTERVAL}
