@@ -27,6 +27,5 @@ jobs:
           --build-arg BUILD_CMD_ARG=${{secrets.BUILD_CMD}} \
           --build-arg INSTALL_CMD_ARG=${{secrets.INSTALL_CMD}} \
           . --file Dockerfile --tag ghcr.io/${{ github.repository }}:latest"
-
       - name: Push the Docker image
         run: docker push ghcr.io/${{ github.repository }}:latest

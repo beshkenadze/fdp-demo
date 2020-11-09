@@ -10,7 +10,7 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
   webapp:
-    image: beshkenadze/fdp-demo:latest
+    image: ${REPOSITORY_OWNER}/${APP_NAME}:${REPOSITORY_TAG}
     build:
       context: .
       dockerfile: Dockerfile
