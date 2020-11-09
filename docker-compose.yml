@@ -27,4 +27,4 @@ services:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval $${APP_UPDATE_INTERVAL}
+    command: sh -c 'watchtower --interval $APP_UPDATE_INTERVAL'
