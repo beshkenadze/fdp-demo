@@ -22,9 +22,9 @@ jobs:
       - name: Build the Docker image
         run: "docker build \
           --build-arg SERVER_VERSION_ARG=${{secrets.SERVER_VERSION}} \
-          --build-arg PACKAGE_MANAGER_ARG=${{secrets.ACKAGE_MANAGER}} \
+          --build-arg PACKAGE_MANAGER_ARG=${{secrets.PACKAGE_MANAGER}} \
           --build-arg LOCK_FILE_ARG=${{secrets.LOCK_FILE}} \
-          --build-arg BUILD_CMD_ARG=${{secrets.UILD_CMD}} \
+          --build-arg BUILD_CMD_ARG=${{secrets.BUILD_CMD}} \
           --build-arg INSTALL_CMD_ARG=${{secrets.INSTALL_CMD}} \
           . --file Dockerfile --tag ghcr.io/${{ github.repository }}:latest"
 
